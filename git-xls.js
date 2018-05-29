@@ -1,7 +1,7 @@
 var parser = require('xml2json');
 var json2xls = require("json2xls");
 var https = require('http');
-var config = require('./config.json');
+// var config = require('./config.json');
 
 fs = require('fs');
 
@@ -25,24 +25,25 @@ const constructObj = (data) => {
     return xlsObj;
 }
 
-const init = function () {
-    config.forEach((item) => {
-        https.get(item.url, (resp) => {
-            let data = '';
+module.exports = function (config) {
+    return new Promise(() => {
+        config.forEach((item) => {
+            https.get(item.url, (resp) => {
+                let data = '';
 
-            // A chunk of data has been recieved.
-            resp.on('data', (chunk) => {
-                data += chunk;
-            });
+                // A chunk of data has been recieved.
+                resp.on('data', (chunk) => {
+                    data += chunk;
+                });
 
-            // The whole response has been received. Print out the result.
-            resp.on('end', () => {
-                var json = JSON.parse(parser.toJson(data));
-                var xls = json2xls(constructObj(json.feed.entry));
-                fs.writeFileSync(item.name + '.xlsx', xls, 'binary');
-            });
+                // The whole response has been received. Print out the result.
+                resp.on('end', () => {
+                    var json = JSON.parse(parser.toJson(data));
+                    var xls = json2xls(constructObj(json.feed.entry));
+                    fs.writeFileSync(item.name + '.xlsx', xls, 'binary');
+                });
+            })
         })
-    })
+    });
 }
 
-init();
