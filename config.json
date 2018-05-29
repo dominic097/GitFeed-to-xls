@@ -1,0 +1,10 @@
+[
+    {
+        "name": "MileStone 6",
+        "url": "http://172.30.32.3/groups/QCS/-/issues.atom?milestone_title=Milestone+6&rss_token=9Cpw_zPxzbYVyow3xq2D&scope=all&sort=due_date&state=opened&utf8=%E2%9C%93"
+    },
+    {
+        "name": "MileStone_6_open",
+        "url": "http://172.30.32.3/groups/QCS/-/issues.atom?label_name%5B%5D=open&milestone_title=Milestone+6&rss_token=9Cpw_zPxzbYVyow3xq2D&scope=all&sort=due_date&state=opened&utf8=%E2%9C%93"
+    }
+]
